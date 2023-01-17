@@ -1,18 +1,28 @@
 function autoReply() {
+  const myEmail = Session.getActiveUser().getEmail();
+  const reply = "Good morning";
+  let replied = false;
   const threads = GmailApp.getInboxThreads();
   for (let i = 0; i < threads.length; i++) {
     const thread = threads[i];
-    const message = thread.getMessages()[0];
-    const subject = message.getSubject();
-    const reply = "Good morning";
-    if (subject.trim().toLowerCase() == new Date().toLocaleString('default', { weekday: 'long' }).toLowerCase()) {
-      console.log(thread.getFirstMessageSubject());
-      console.log(message.getFrom());
-      console.log(reply);
+    const subject = thread.getFirstMessageSubject();
+    const replies = thread.getReplies();
+    if(replied) {
+      console.log("This script has already replied this session")
+      continue;
+    }
+    for (let i = 0; i < replies.length; i++) {
+        if(replies[i].getFrom() === myEmail){
+            replied = true;
+            console.log("This script replied earlier")
+            break;
+        }
+    }
+    if (subject.trim().toLowerCase() == new Date().toLocaleString('default', { weekday: 'long' }).toLowerCase() && !replied) {
       thread.replyAll(reply);
-      break;
-    } else {
-      continue
+      replied = true;
+      console.log("replied")
+      return;
     }
   }
 }
