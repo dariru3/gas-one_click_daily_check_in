@@ -6,7 +6,7 @@ function autoReply() {
   for (let i = 0; i < threads.length; i++) {
     const thread = threads[i];
     const subject = thread.getFirstMessageSubject();
-    const replies = thread.getReplies();
+    const replies = thread.getMessages();
     if(replied) {
       console.log("This script has already replied this session")
       continue;

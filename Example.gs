@@ -1,4 +1,4 @@
-function autoReply2() {
+function autoReply2_() {
   const threads = GmailApp.getInboxThreads();
   const greetings = [
     "Good morning",
