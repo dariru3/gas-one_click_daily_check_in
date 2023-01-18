@@ -17,7 +17,7 @@ function autoReply() {
           return;
         }
       }
-      //thread.replyAll(reply);
+      thread.replyAll(reply);
       replied = true;
       console.log("replied")
       return;
