@@ -3,11 +3,13 @@ function autoReply() {
   console.log("email:", myEmail)
   const reply = "Good morning";
   let replied = false;
+  console.log("replied:", replied)
   const threads = GmailApp.getInboxThreads();
   for (let i = 0; i < threads.length; i++) {
     const thread = threads[i];
     const subject = thread.getFirstMessageSubject();
     if(subject.trim().toLowerCase() == new Date().toLocaleString('default', { weekday: 'long' }).toLowerCase() && !replied) {
+      thread.markUnimportant();
       const replies = thread.getMessages();
       for(let j = 0; j < replies.length; j++) {
         console.log("replies from:", replies[j].getFrom())
