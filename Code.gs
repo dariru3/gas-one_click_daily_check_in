@@ -1,4 +1,15 @@
 function autoReply() {
+  const dayOff = checkCalendar();
+  if(dayOff == true){
+    return
+  };
+
+  const todayDay = new Date().toLocaleString('default', { weekday: 'long' }).toLowerCase();
+  if(todayDay == "saturday" || todayDay == "sunday"){
+    console.log("Have a nice weekend!")
+    return
+  }
+
   const myEmail = Session.getActiveUser().getEmail();
   console.log("email:", myEmail)
   const reply_message = "Good morning";
@@ -8,7 +19,6 @@ function autoReply() {
     const emailThread = inboxThreads[i];
     let emailSubject = emailThread.getFirstMessageSubject();
     emailSubject = emailSubject.trim().toLowerCase();
-    const todayDay = new Date().toLocaleString('default', { weekday: 'long' }).toLowerCase();
     
     if(emailSubject == todayDay) {
       emailThread.markUnimportant();
