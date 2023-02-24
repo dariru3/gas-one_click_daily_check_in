@@ -4,7 +4,12 @@ function autoReply() {
     return
   };
 
-  const todayDay = new Date().toLocaleString('default', { weekday: 'long' }).toLowerCase();
+  const today = new Date();
+  const todayDay = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
+  const todayDate = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' });
+  const todayString = todayDay + ' ' + todayDate;
+  console.log(todayString)
+
   if(todayDay == "saturday" || todayDay == "sunday"){
     console.log("Have a nice weekend!")
     return
@@ -20,7 +25,7 @@ function autoReply() {
     let emailSubject = emailThread.getFirstMessageSubject();
     emailSubject = emailSubject.trim().toLowerCase();
     
-    if(emailSubject == todayDay) {
+    if(emailSubject == todayString || emailSubject == todayDay) {
       emailThread.markUnimportant();
       const emailReplies = emailThread.getMessages();
       for(let j = 0; j < emailReplies.length; j++) {
@@ -30,7 +35,7 @@ function autoReply() {
           return;
         }
       }
-      emailThread.replyAll(reply_message);
+      // emailThread.replyAll(reply_message);
       console.log("replied")
       return;
     }
