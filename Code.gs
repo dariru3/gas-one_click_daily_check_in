@@ -1,6 +1,7 @@
 function autoReply() {
   const dayOff = checkCalendar();
   if(dayOff == true){
+    console.log("Have a nice day off!")
     return
   };
 
@@ -10,7 +11,7 @@ function autoReply() {
   const todayString = todayDay + ' ' + todayDate;
   console.log(todayString);
 
-  if(todayDay == "saturday" || todayDay == "sunday"){
+  if(todayDay == "sunday"){
     console.log("Have a nice weekend!");
     return
   }
