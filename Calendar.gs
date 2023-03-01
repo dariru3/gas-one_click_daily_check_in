@@ -6,7 +6,7 @@ function checkCalendar() {
 
   for(const event of events){
     // console.log(event.getTitle())
-    const dayOff = ['有給', '祝日']
+    const dayOff = ['有給', '祝日', 'ピットイン休暇']
     if(event.isAllDayEvent() == true && dayOff.includes(event.getTitle())){
       console.log('Have a nice day off!')
       return true
