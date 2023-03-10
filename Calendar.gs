@@ -1,10 +1,9 @@
-function checkCalendar() {
+function checkCalendar(today) {
   let dayOff = false;
   const calendar = CalendarApp.getDefaultCalendar();
-  const today = new Date();
 
   if(today.getDay() == 0){
-    console.log("Today is Sunday. Have anice day off!")
+    console.log("Today is Sunday. Have a nice day off!")
     dayOff = true
   }
   
