@@ -1,10 +1,9 @@
-function checkCalendar(today) {
-  let dayOff = false;
+function checkDayOff(today) {
   const calendar = CalendarApp.getDefaultCalendar();
 
   if(today.getDay() == 0){
     console.log("Today is Sunday. Have a nice day off!")
-    dayOff = true
+    return true
   }
   
   const events = calendar.getEventsForDay(today);
@@ -12,11 +11,9 @@ function checkCalendar(today) {
     const dayOffEvents = ['有給', '祝日', 'ピットイン休暇']
     if(event.isAllDayEvent() == true && dayOffEvents.includes(event.getTitle())){
       console.log('Have a nice day off!')
-      dayOff = true
+      return true
     }
   }
-
-  return dayOff
 }
 
 function getDayDate(today){

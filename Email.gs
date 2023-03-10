@@ -1,4 +1,4 @@
-function findCheckinMail(todayString, todayDay){
+function findCheckinEmail(todayString, todayDay){
     const inboxThreads = GmailApp.getInboxThreads();
     for (let i = 0; i < inboxThreads.length; i++) {
         const emailThread = inboxThreads[i];
