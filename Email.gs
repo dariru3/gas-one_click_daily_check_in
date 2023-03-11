@@ -1,4 +1,5 @@
 function findCheckinEmail(todayString, todayDay){
+    const groupEmail = "EditorialGroup <edit_all@link-cc.co.jp>"
     const inboxThreads = GmailApp.getInboxThreads();
     for (let i = 0; i < inboxThreads.length; i++) {
         const emailThread = inboxThreads[i];
@@ -7,7 +8,7 @@ function findCheckinEmail(todayString, todayDay){
         emailSubject = emailSubject.trim().toLowerCase();
         console.log(emailSubject)
         
-        if((emailSubject == todayString || emailSubject == todayDay) && toAddress == "EditorialGroup <edit_all@link-cc.co.jp>") {
+        if((emailSubject == todayString || emailSubject == todayDay) && toAddress == groupEmail) {
             return emailThread
         }
         else {
