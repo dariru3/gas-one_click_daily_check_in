@@ -8,5 +8,5 @@ function autoReply() {
   const todayDay = getDayDate(today)[0];
   const todayString = getDayDate(today)[1];
   const checkinEmailThread = findCheckinEmail(todayString, todayDay);
-  replyToThread(checkinEmailThread, myEmail, reply_message);
+  checkinEmailThread ? replyToThread(checkinEmailThread, myEmail, reply_message) : console.log("Check-in email thread not found.");
 }
