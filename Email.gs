@@ -1,5 +1,5 @@
 function findCheckinEmail(todayString, todayDay){
-    const groupEmail = "EditorialGroup <edit_all@link-cc.co.jp>";
+    const groupEmail = config.groupEmail;
     const inboxThreads = GmailApp.getInboxThreads();
     for (let i = 0; i < inboxThreads.length; i++) {
         const emailThread = inboxThreads[i];

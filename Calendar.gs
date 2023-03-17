@@ -8,7 +8,7 @@ function checkDayOff(today) {
   
   const events = calendar.getEventsForDay(today);
   for(const event of events){
-    const dayOffEvents = ['有給', '祝日', 'ピットイン休暇']
+    const dayOffEvents = config.dayOffEvents;
     if(event.isAllDayEvent() == true && dayOffEvents.includes(event.getTitle())){
       console.log('Have a nice day off!')
       return true
@@ -21,5 +21,5 @@ function getDayDate(today){
   const todayDate = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' });
   const todayString = todayDay + ' ' + todayDate;
 
-  return [todayDay, todayString]
+  return { day: todayDay, dateString: todayString }
 }
