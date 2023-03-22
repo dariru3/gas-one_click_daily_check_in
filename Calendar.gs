@@ -8,12 +8,14 @@ function checkDayOff(today) {
   
   const events = calendar.getEventsForDay(today);
   for(const event of events){
+    console.log("event:", event.getTitle())
     const dayOffEvents = config.dayOffEvents;
     if(event.isAllDayEvent() == true && dayOffEvents.includes(event.getTitle())){
       console.log('Have a nice day off!')
       return true
     }
   }
+  console.warn("Today is a work day")
 }
 
 function getDayDate(today){
