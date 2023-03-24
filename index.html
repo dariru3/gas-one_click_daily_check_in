@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <title>TRG Check-in</title>
+    <style>
+      #working {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="checkInButton">Check In</button>
+    <div id="working">Working<span id="dots"></span></div>
+    <div id="logOutput"></div>
+    <script>
+      let workingInterval;
+
+      function displayLog(log) {
+        clearInterval(workingInterval);
+        document.getElementById("working").style.display = "none";
+        document.getElementById("logOutput").innerHTML = log;
+      }
+
+      function showWorking() {
+        document.getElementById("working").style.display = "block";
+        let dots = "";
+        workingInterval = setInterval(() => {
+          dots = dots.length < 3 ? dots + "." : "";
+          document.getElementById("dots").innerText = dots;
+        }, 500);
+      }
+
+      document.getElementById("checkInButton").addEventListener("click", () => {
+        showWorking();
+        google.script.run.withSuccessHandler(displayLog).autoReply();
+      });
+    </script>
+  </body>
+</html>
