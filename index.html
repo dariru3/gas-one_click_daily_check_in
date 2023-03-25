@@ -3,14 +3,84 @@
   <head>
     <base target="_top">
     <title>TRG Check-in</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+      }
       #working {
         display: none;
+        margin-top: 1rem;
       }
-    </style>
+      #buttonContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #customMessageContainer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      button, #customMessage {
+        width: 200px;
+        margin-bottom: 1rem;
+      }
+      button {
+        background-color: #4169E1;
+        color: white;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 12px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #1E90FF;
+      }
+      #customMessage {
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      #logOutput {
+        width: 200px;
+      }
+      .logMessage {
+        font-size: 16px;
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 12px;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+    </style>    
+    
   </head>
   <body>
-    <button id="checkInButton">Check In</button>
+    <div id="buttonContainer">
+      <button id="goodMorningButton"><i class="fa-regular fa-sun"></i> Good Morning</button>
+      <button id="goodAfternoonButton"><i class="fa-solid fa-mug-hot"></i> Good Afternoon</button>
+      <div id="customMessageContainer">
+        <button id="customMessageButton"><i class="fa-solid fa-pencil"></i> Custom Message</button>
+        <input type="text" id="customMessage" placeholder="Enter custom message" />
+      </div>
+      <br />
+    </div>
     <div id="working">Working<span id="dots"></span></div>
     <div id="logOutput"></div>
     <script>
@@ -19,7 +89,7 @@
       function displayLog(log) {
         clearInterval(workingInterval);
         document.getElementById("working").style.display = "none";
-        document.getElementById("logOutput").innerHTML = log;
+        document.getElementById("logOutput").innerHTML = '<div class="logMessage">' + log + '</div>';
       }
 
       function showWorking() {
@@ -31,9 +101,26 @@
         }, 500);
       }
 
-      document.getElementById("checkInButton").addEventListener("click", () => {
+      function runAutoReply(reply_message) {
         showWorking();
-        google.script.run.withSuccessHandler(displayLog).autoReply();
+        google.script.run.withSuccessHandler(displayLog).autoReply(reply_message);
+      }
+
+      document.getElementById("goodMorningButton").addEventListener("click", () => {
+        runAutoReply("Good morning");
+      });
+
+      document.getElementById("goodAfternoonButton").addEventListener("click", () => {
+        runAutoReply("Good afternoon");
+      });
+
+      document.getElementById("customMessageButton").addEventListener("click", () => {
+        const customMessage = document.getElementById("customMessage").value;
+        if (customMessage.trim() === "") {
+          alert("Please enter a custom message.")
+        } else {
+          runAutoReply(customMessage);
+        }
       });
     </script>
   </body>
