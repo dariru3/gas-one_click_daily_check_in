@@ -2,13 +2,14 @@ function doGet() {
   return HtmlService.createHtmlOutputFromFile("index.html");
 }
 
-function autoReply(reply_message) {
+function autoReply(customMessage) {
   const today = new Date();
 
   const myEmail = Session.getActiveUser().getEmail();
   const todayDay = getDayDate(today).day;
   const todayString = getDayDate(today).dateString;
   const checkinEmailThread = findCheckinEmail(todayString, todayDay);
+  const reply_message = customMessage || getGreetingBasedOnTime();
 
   if (checkinEmailThread) {
     return replyToThread(checkinEmailThread, myEmail, reply_message);
