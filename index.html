@@ -15,9 +15,13 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f0f2f5;
       }
-      #working {
+      #working, .logMessage {
         display: none;
+        font-size: 16px;
+        color: #333;
         margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
       }
       #buttonContainer {
         display: flex;
@@ -58,16 +62,6 @@
       #logOutput {
         width: 200px;
       }
-      .logMessage {
-        font-size: 16px;
-        color: #333;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 12px;
-        margin-bottom: 0.5rem;
-        text-align: center;
-      }
     </style>    
     
   </head>
@@ -80,7 +74,7 @@
       </div>
       <br />
     </div>
-    <div id="working">Working<span id="dots"></span></div>
+    <div id="working">Working</div>
     <div id="logOutput"></div>
     <script>
       let workingInterval;
@@ -88,7 +82,8 @@
       function displayLog(log) {
         clearInterval(workingInterval);
         document.getElementById("working").style.display = "none";
-        document.getElementById("logOutput").innerHTML = '<div class="logMessage">' + log + '</div>';
+        document.getElementById("logOutput").style.display = "block";
+        document.getElementById("logOutput").innerText = log;
       }
 
       function showWorking() {
