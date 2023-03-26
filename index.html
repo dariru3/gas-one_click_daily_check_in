@@ -73,8 +73,7 @@
   </head>
   <body>
     <div id="buttonContainer">
-      <button id="goodMorningButton"><i class="fa-regular fa-sun"></i> Good Morning</button>
-      <button id="goodAfternoonButton"><i class="fa-solid fa-mug-hot"></i> Good Afternoon</button>
+      <button id="checkinButton"><i class="fa-regular fa-clock"></i> Check-in</button>
       <div id="customMessageContainer">
         <button id="customMessageButton"><i class="fa-solid fa-pencil"></i> Custom Message</button>
         <input type="text" id="customMessage" placeholder="Enter custom message" />
@@ -105,6 +104,12 @@
         showWorking();
         google.script.run.withSuccessHandler(displayLog).autoReply(reply_message);
       }
+
+      document.getElementById("checkinButton").addEventListener("click", () => {
+        google.script.run.withSuccessHandler((greeting) => {
+          runAutoReply(greeting);
+        }).getGreetingBasedOnTime();
+      });
 
       document.getElementById("goodMorningButton").addEventListener("click", () => {
         runAutoReply("Good morning");

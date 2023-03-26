@@ -17,6 +17,17 @@ function autoReply(reply_message) {
   }
 }
 
+function getGreetingBasedOnTime() {
+  const currentHour = new Date().getHours();
+  if (currentHour >= 0 && currentHour < 12) {
+    return "Good morning";
+  } else if (currentHour >= 12 && currentHour < 17) {
+    return "Good afternoon";
+  } else {
+    return "Good evening";
+  }
+}
+
 function replyToThread(emailThread, myEmail, reply_message) {
   const emailReplies = emailThread.getMessages();
   for (let j = 0; j < emailReplies.length; j++) {
