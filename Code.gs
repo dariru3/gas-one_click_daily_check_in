@@ -3,6 +3,9 @@ function doGet() {
 }
 
 function autoReply(customMessage) {
+  if (typeof customMessage == 'undefined') {
+    customMessage = null;
+  }
   const today = new Date();
 
   const myEmail = Session.getActiveUser().getEmail();

@@ -23,6 +23,12 @@
         margin-bottom: 0.5rem;
         text-align: center;
       }
+      #logContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
       #buttonContainer {
         display: flex;
         justify-content: center;
@@ -75,7 +81,8 @@
       <br />
     </div>
     <div id="working">Working</div>
-    <div id="logOutput"></div>
+    <div id="logContainer">
+      <div id="logOutput"></div>
     <script>
       let workingInterval;
 
