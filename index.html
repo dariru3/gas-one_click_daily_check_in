@@ -93,11 +93,22 @@
 
       function showWorking() {
         document.getElementById("working").style.display = "block";
-        let dots = "";
+        let opacity = 0;
+        let increasing = true;
         workingInterval = setInterval(() => {
-          dots = dots.length < 3 ? dots + "." : "";
-          document.getElementById("dots").innerText = dots;
-        }, 500);
+          if (increasing) {
+            opacity += 0.1;
+            if (opacity >= 1) {
+              increasing = false;
+            }
+          } else {
+            opacity -= 0.1;
+            if (opacity <= 0) {
+              increasing = true;
+            }
+          }
+          document.getElementById("working").style.opacity = opacity;
+        }, 100);
       }
 
       function runAutoReply(customMessage) {
