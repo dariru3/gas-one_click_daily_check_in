@@ -3,37 +3,132 @@
   <head>
     <base target="_top">
     <title>TRG Check-in</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <style>
-      #working {
-        display: none;
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
       }
-    </style>
+      #working, .logMessage {
+        display: none;
+        font-size: 16px;
+        color: #333;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+      #logContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      #buttonContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #customMessageContainer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      button, #customMessage {
+        width: 200px;
+        margin-bottom: 1rem;
+      }
+      button {
+        background-color: #4169E1;
+        color: white;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 12px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #1E90FF;
+      }
+      #customMessage {
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      #logOutput {
+        width: 200px;
+      }
+    </style>    
+    
   </head>
   <body>
-    <button id="checkInButton">Check In</button>
-    <div id="working">Working<span id="dots"></span></div>
-    <div id="logOutput"></div>
+    <div id="buttonContainer">
+      <button id="checkinButton"><i class="fa-solid fa-check-to-slot"></i> Check-in</button>
+      <div id="customMessageContainer">
+        <button id="customMessageButton"><i class="fa-solid fa-pencil"></i> Custom Message</button>
+        <input type="text" id="customMessage" placeholder="Enter custom message" />
+      </div>
+      <br />
+    </div>
+    <div id="working">Working</div>
+    <div id="logContainer">
+      <div id="logOutput"></div>
     <script>
       let workingInterval;
 
       function displayLog(log) {
         clearInterval(workingInterval);
         document.getElementById("working").style.display = "none";
-        document.getElementById("logOutput").innerHTML = log;
+        document.getElementById("logOutput").style.display = "block";
+        document.getElementById("logOutput").innerText = log;
       }
 
       function showWorking() {
         document.getElementById("working").style.display = "block";
-        let dots = "";
+        let opacity = 0;
+        let increasing = true;
         workingInterval = setInterval(() => {
-          dots = dots.length < 3 ? dots + "." : "";
-          document.getElementById("dots").innerText = dots;
-        }, 500);
+          if (increasing) {
+            opacity += 0.1;
+            if (opacity >= 1) {
+              increasing = false;
+            }
+          } else {
+            opacity -= 0.1;
+            if (opacity <= 0) {
+              increasing = true;
+            }
+          }
+          document.getElementById("working").style.opacity = opacity;
+        }, 100);
       }
 
-      document.getElementById("checkInButton").addEventListener("click", () => {
+      function runAutoReply(customMessage) {
         showWorking();
-        google.script.run.withSuccessHandler(displayLog).autoReply();
+        google.script.run.withSuccessHandler(displayLog).autoReply(customMessage);
+      }
+
+      document.getElementById("checkinButton").addEventListener("click", () => {
+        runAutoReply();
+      });
+
+      document.getElementById("customMessageButton").addEventListener("click", () => {
+        const customMessage = document.getElementById("customMessage").value;
+        if (customMessage.trim() === "") {
+          alert("Please enter a custom message.")
+        } else {
+          runAutoReply(customMessage);
+        }
       });
     </script>
   </body>
