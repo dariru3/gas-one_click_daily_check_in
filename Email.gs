@@ -1,4 +1,4 @@
-function findCheckinEmail(todayString, todayDay){
+function findCheckinEmail_(todayString, todayDay){
     const groupEmail = config.groupEmail;
     const inboxThreads = GmailApp.getInboxThreads();
     for (let i = 0; i < inboxThreads.length; i++) {
@@ -17,7 +17,7 @@ function findCheckinEmail(todayString, todayDay){
     }
 }
 
-function replyToThread(emailThread, myEmail, reply_message){
+function replyToThread_(emailThread, myEmail, reply_message){
     const emailReplies = emailThread.getMessages();
     for(let j = 0; j < emailReplies.length; j++) {
         console.log(emailReplies[j].getFrom())

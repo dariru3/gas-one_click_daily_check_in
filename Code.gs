@@ -9,19 +9,19 @@ function autoReply(customMessage) {
   const today = new Date();
 
   const myEmail = Session.getActiveUser().getEmail();
-  const todayDay = getDayDate(today).day;
-  const todayString = getDayDate(today).dateString;
-  const checkinEmailThread = findCheckinEmail(todayString, todayDay);
-  const reply_message = customMessage || getGreetingBasedOnTime();
+  const todayDay = getDayDate_(today).day;
+  const todayString = getDayDate_(today).dateString;
+  const checkinEmailThread = findCheckinEmail_(todayString, todayDay);
+  const reply_message = customMessage || getGreetingBasedOnTime_();
 
   if (checkinEmailThread) {
-    return replyToThread(checkinEmailThread, myEmail, reply_message);
+    return replyToThread_(checkinEmailThread, myEmail, reply_message);
   } else {
     return "Check-in email thread not found.";
   }
 }
 
-function getGreetingBasedOnTime() {
+function getGreetingBasedOnTime_() {
   const currentHour = new Date().getHours();
   if (currentHour >= 0 && currentHour < 12) {
     return "Good morning";
@@ -30,15 +30,4 @@ function getGreetingBasedOnTime() {
   } else {
     return "Good evening";
   }
-}
-
-function replyToThread(emailThread, myEmail, reply_message) {
-  const emailReplies = emailThread.getMessages();
-  for (let j = 0; j < emailReplies.length; j++) {
-    if (emailReplies[j].getFrom() === myEmail) {
-      return "This script replied earlier.";
-    }
-  }
-  // emailThread.replyAll(reply_message);
-  return "replied";
 }

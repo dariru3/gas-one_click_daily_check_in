@@ -1,4 +1,9 @@
-function checkDayOff(today) {
+/**
+ * Unused. 
+ * BUG: Didn't catch day off.
+ * Shouldn't be timed automated anyway.
+
+function checkDayOff_(today) {
   const calendar = CalendarApp.getDefaultCalendar();
 
   if(today.getDay() == 0){
@@ -17,8 +22,9 @@ function checkDayOff(today) {
   }
   console.warn("Today is a work day")
 }
+*/
 
-function getDayDate(today){
+function getDayDate_(today){
   const todayDay = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
   const todayDate = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' });
   const todayString = todayDay + ' ' + todayDate;
