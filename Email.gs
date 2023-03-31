@@ -22,9 +22,11 @@ function replyToThread_(emailThread, myEmail, reply_message){
     for(let j = 0; j < emailReplies.length; j++) {
         console.log(emailReplies[j].getFrom())
         if(emailReplies[j].getFrom() === myEmail){
+            console.log("This script replied earlier")
             return "This script replied earlier";
         }
     }
     emailThread.replyAll(reply_message);
+    console.log("replied")
     return "replied";
 }
