@@ -1,4 +1,4 @@
-# Group Check-in (email and chat)
+# One-click Check-in (email and chat)
 This project is a Google Apps Script that automates the process of checking in daily by replying to a designated email thread and posting to Google Chat.
 
 ## Files
