@@ -9,6 +9,7 @@ function autoReply(customMessage) {
   const today = new Date();
 
   const myEmail = Session.getActiveUser().getEmail();
+  console.log("My email:", myEmail);
   const todayDay = getDayDate_(today).day;
   const todayString = getDayDate_(today).dateString;
   const checkinEmailThread = findCheckinEmail_(todayString, todayDay);
