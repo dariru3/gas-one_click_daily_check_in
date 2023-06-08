@@ -10,9 +10,9 @@ function autoReply(customMessage) {
 
   const myEmail = Session.getActiveUser().getEmail();
   console.log("My email:", myEmail);
-  const todayDay = getDayDate_(today).day;
-  const todayString = getDayDate_(today).dateString;
-  const checkinEmailThread = findCheckinEmail_(todayString, todayDay);
+  const todayDayPatterns = getDayDate_(today)
+  console.log(todayDayPatterns)
+  const checkinEmailThread = findCheckinEmail_(todayDayPatterns);
   const reply_message = customMessage || getGreetingBasedOnTime_();
 
   chatCheckin(reply_message);
@@ -22,6 +22,15 @@ function autoReply(customMessage) {
   } else {
     return "Check-in email thread not found.";
   }
+}
+
+function getDayDate_(today){
+  const todayDay = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
+  const todayDate = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' });
+  const todayString = todayDay + ' ' + todayDate;
+  const todayString2 = todayDay + ', ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
+
+  return [todayDay, todayString, todayString2]
 }
 
 function getGreetingBasedOnTime_() {
