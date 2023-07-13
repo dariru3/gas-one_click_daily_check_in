@@ -25,12 +25,14 @@ function autoReply(customMessage) {
 }
 
 function getDayDate_(today){
+  // today = new Date()
   const todayDay = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
   const todayDate = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' });
   const todayString = todayDay + ' ' + todayDate;
   const todayString2 = todayDay + ', ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
-
-  return [todayDay, todayString, todayString2]
+  const todayString3 = todayDay + ' ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
+  console.log(todayDate, todayString, todayString2, todayString3)
+  return [todayDay, todayString, todayString2, todayString3]
 }
 
 function getGreetingBasedOnTime_() {
