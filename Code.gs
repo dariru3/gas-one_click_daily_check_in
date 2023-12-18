@@ -28,11 +28,11 @@ function getDayDate_(today){
   // today = new Date()
   const todayDay = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
   const todayDate = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' });
-  const todayString = todayDay + ' ' + todayDate;
-  const todayString2 = todayDay + ', ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
-  const todayString3 = todayDay + ' ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
-  console.log(todayDate, todayString, todayString2, todayString3)
-  return [todayDay, todayString, todayString2, todayString3]
+  const dayDate = todayDay + ' ' + todayDate;
+  const dayCommaMonthDate = todayDay + ', ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
+  const dayMonthDate = todayDay + ' ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
+  console.log("day:", todayDay,"date:", todayDate, "day and date:", dayDate, "day, month date:", dayCommaMonthDate, "day month date:", dayMonthDate)
+  return [todayDay, dayDate, dayCommaMonthDate, dayMonthDate]
 }
 
 function getGreetingBasedOnTime_() {

@@ -26,7 +26,6 @@ function chatCheckin(message) {
     return "Posted to chat";
   } catch (error) {
     Logger.log('Error posting to chat:', error);
-    // You can return an error message or handle the error as needed
     return "Error posting to chat";
   }
 }

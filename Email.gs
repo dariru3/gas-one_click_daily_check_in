@@ -26,9 +26,7 @@ function replyToThread_(emailThread, myEmail, reply_message){
             return "This script replied earlier";
         }
     }
-    emailThread.replyAll(reply_message, {
-      name: config.myName
-    });
+    emailThread.replyAll(reply_message, { name: config.myName });
     console.log("replied")
     return "replied";
 }
