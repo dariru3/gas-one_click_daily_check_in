@@ -15,9 +15,8 @@ function autoReply(customMessage) {
   const checkinEmailThread = findCheckinEmail_(todayDayPatterns);
   const reply_message = customMessage || getGreetingBasedOnTime_();
 
-  chatCheckin(reply_message);
-
   if (checkinEmailThread) {
+    chatCheckin(reply_message);
     return replyToThread_(checkinEmailThread, myEmail, reply_message);
   } else {
     return "Check-in email thread not found.";
