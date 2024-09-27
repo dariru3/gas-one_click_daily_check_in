@@ -17,7 +17,7 @@ function autoReply(customMessage) {
 
   if (checkinEmailThread) {
     chatCheckin(reply_message);
-    return replyToThread_(checkinEmailThread, myEmail, reply_message);
+    replyToThread_(checkinEmailThread, myEmail, reply_message);
   } else {
     return "Check-in email thread not found.";
   }
@@ -25,13 +25,20 @@ function autoReply(customMessage) {
 
 function getDayDate_(today){
   // today = new Date()
-  const todayDay = today.toLocaleString('default', { weekday: 'long' }).toLowerCase();
-  const todayDate = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' });
-  const dayDate = todayDay + ' ' + todayDate;
-  const dayCommaMonthDate = todayDay + ', ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
-  const dayMonthDate = todayDay + ' ' + today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
-  console.log("day:", todayDay,"date:", todayDate, "day and date:", dayDate, "day, month date:", dayCommaMonthDate, "day month date:", dayMonthDate)
-  return [todayDay, dayDate, dayCommaMonthDate, dayMonthDate]
+  const dayLong = today.toLocaleString('default', { weekday: 'long' }).toLowerCase(); // pattern 1
+  const monthSlashDate_num = today.toLocaleString('en-US', { month: 'numeric', day: 'numeric' }); // pattern 2
+  const dayLongSpaceDateSlash_num = `${dayLong} ${monthSlashDate_num}`; // pattern 3
+  const monthLongDateNum = today.toLocaleString('en-US', { month: 'long', day: 'numeric'}).toLowerCase();
+  const dayLongCommaMonthLongDateNum = `${dayLong}, ${monthLongDateNum}`; // pattern 4
+  const dayLongMonthLongDateNum = `${dayLong}, ${monthLongDateNum}`; // pattern 5
+  console.log(`
+  pattern 1: ${dayLong}
+  pattern 2: ${monthSlashDate_num}
+  pattern 3: ${dayLongSpaceDateSlash_num}
+  pattern 4: ${dayLongCommaMonthLongDateNum}
+  pattern 5: ${dayLongMonthLongDateNum}
+  `)
+  return [dayLong, monthSlashDate_num, dayLongSpaceDateSlash_num, dayLongCommaMonthLongDateNum, dayLongMonthLongDateNum]
 }
 
 function getGreetingBasedOnTime_() {
